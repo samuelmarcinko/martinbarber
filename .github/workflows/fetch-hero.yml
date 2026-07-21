@@ -1,0 +1,82 @@
+name: Fetch Hero Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_url:
+        description: "Public CloudFront hero video URL"
+        required: true
+        default: "https://d8j0ntlcm91z4.cloudfront.net/user_3GQyG6AnXYy2ZldSy6Ui5zkkStz/hf_20260721_201232_be5cbf63-e325-45ea-8d6f-e3d99e21ea1a.mp4"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: claude/inspect-repo-higgsfield-ocaw9c
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Download hero video
+        run: |
+          mkdir -p assets/generated public/frames public/images/gallery
+          curl -fSL "${{ github.event.inputs.video_url }}" -o assets/generated/hero.mp4
+          cp assets/generated/hero.mp4 public/hero.mp4
+          echo "== file =="
+          ls -la assets/generated/hero.mp4
+          file assets/generated/hero.mp4
+
+      - name: Probe video
+        run: |
+          echo "== ffprobe stream =="
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height,r_frame_rate,avg_frame_rate,nb_frames -show_entries format=duration,size,bit_rate -of default=noprint_wrappers=1 assets/generated/hero.mp4
+
+      - name: Extract JPEG frames (24fps, 1920w)
+        run: |
+          ffmpeg -y -i assets/generated/hero.mp4 -vf "fps=24,scale=1920:-2" -q:v 3 "public/frames/frame_%04d.jpg"
+          COUNT=$(ls public/frames/frame_*.jpg | wc -l | tr -d ' ')
+          SIZE_MB=$(du -sm public/frames | cut -f1)
+          echo "initial FRAME_COUNT=$COUNT  frames_dir=${SIZE_MB}MB"
+          if [ "$SIZE_MB" -gt 250 ]; then
+            echo "frames dir over 250MB, re-extracting at -q:v 4"
+            rm -f public/frames/frame_*.jpg
+            ffmpeg -y -i assets/generated/hero.mp4 -vf "fps=24,scale=1920:-2" -q:v 4 "public/frames/frame_%04d.jpg"
+            COUNT=$(ls public/frames/frame_*.jpg | wc -l | tr -d ' ')
+            SIZE_MB=$(du -sm public/frames | cut -f1)
+            echo "re-extracted FRAME_COUNT=$COUNT frames_dir=${SIZE_MB}MB"
+          fi
+          echo "$COUNT" > .hero-frame-count.txt
+          cp public/frames/frame_0001.jpg public/images/hero-poster.jpg
+          echo "FINAL FRAME_COUNT=$COUNT"
+
+      - name: Select gallery frames
+        run: |
+          COUNT=$(cat .hero-frame-count.txt)
+          IDXS=$(python3 - "$COUNT" <<'PY'
+          import sys
+          n=int(sys.argv[1])
+          pts=[max(1,min(n,int(round(n*f)))) for f in (0.12,0.40,0.66,0.90)]
+          print(" ".join(f"{p:04d}" for p in pts))
+          PY
+          )
+          echo "gallery source frames: $IDXS"
+          i=1
+          for idx in $IDXS; do
+            cp "public/frames/frame_${idx}.jpg" "public/images/gallery/gallery-0${i}.jpg"
+            i=$((i+1))
+          done
+          ls -la public/images/gallery
+
+      - name: Commit assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f assets/generated/hero.mp4 public/hero.mp4 public/frames public/images/hero-poster.jpg public/images/gallery .hero-frame-count.txt
+          git commit -m "Add generated hero video, extracted frames, poster and gallery [skip ci]"
+          git push origin HEAD:claude/inspect-repo-higgsfield-ocaw9c
