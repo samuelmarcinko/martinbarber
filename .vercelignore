@@ -1,0 +1,5 @@
+frames/
+assets/generated/
+references/
+*.log
+.DS_Store
