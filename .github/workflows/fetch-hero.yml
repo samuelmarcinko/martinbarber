@@ -58,18 +58,16 @@ jobs:
       - name: Select gallery frames
         run: |
           COUNT=$(cat .hero-frame-count.txt)
-          IDXS=$(python3 - "$COUNT" <<'PY'
-          import sys
-          n=int(sys.argv[1])
-          pts=[max(1,min(n,int(round(n*f)))) for f in (0.12,0.40,0.66,0.90)]
-          print(" ".join(f"{p:04d}" for p in pts))
-          PY
-          )
-          echo "gallery source frames: $IDXS"
-          i=1
-          for idx in $IDXS; do
-            cp "public/frames/frame_${idx}.jpg" "public/images/gallery/gallery-0${i}.jpg"
-            i=$((i+1))
+          i1=$(( (COUNT*12 + 50) / 100 )); [ "$i1" -lt 1 ] && i1=1
+          i2=$(( (COUNT*40 + 50) / 100 )); [ "$i2" -lt 1 ] && i2=1
+          i3=$(( (COUNT*66 + 50) / 100 )); [ "$i3" -lt 1 ] && i3=1
+          i4=$(( (COUNT*90 + 50) / 100 )); [ "$i4" -gt "$COUNT" ] && i4=$COUNT
+          echo "gallery source indices: $i1 $i2 $i3 $i4"
+          n=1
+          for idx in "$i1" "$i2" "$i3" "$i4"; do
+            src=$(printf "public/frames/frame_%04d.jpg" "$idx")
+            cp "$src" "public/images/gallery/gallery-0${n}.jpg"
+            n=$((n+1))
           done
           ls -la public/images/gallery
 
