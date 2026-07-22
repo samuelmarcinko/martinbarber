@@ -328,7 +328,7 @@ export default function ScrollHero() {
           </div>
 
           <div ref={indicatorRef} className="hero-indicator" aria-hidden>
-            <span>Scroll to enter</span>
+            <span>Začnite skrolovaním</span>
             <span className="hero-indicator-line" />
           </div>
         </div>

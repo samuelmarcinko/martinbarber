@@ -297,6 +297,13 @@ canvas {
 .hero-content-static .eyebrow {
   color: #e2c48d;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+  display: inline-block;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(10, 8, 6, 0.42);
+  border: 1px solid rgba(226, 196, 141, 0.28);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .hero-lead {
@@ -863,11 +870,13 @@ canvas {
 }
 
 @media (max-width: 768px) {
+  /* Longer scroll track on mobile → the frame animation advances more slowly
+     per swipe, so a fast flick no longer skips through it. */
   .hero-outer {
-    height: 300vh;
+    height: 450vh;
   }
   .hero-phase {
-    padding-bottom: clamp(4.5rem, 14vh, 7rem);
+    padding-bottom: clamp(6.5rem, 19vh, 9.5rem);
   }
   .hero-phase1-inner,
   .hero-phase3-inner {
