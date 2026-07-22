@@ -135,7 +135,11 @@ export function ToolBackdrop({
       aria-hidden="true"
     >
       <div className="tool-rot" style={{ transform: `rotate(${rotate}deg)` }}>
-        <MotifSvg variant={variant} />
+        {variant === "scissors" ? (
+          <ScissorsSnip className="scissors-bg" />
+        ) : (
+          <MotifSvg variant="comb" />
+        )}
       </div>
     </motion.div>
   );

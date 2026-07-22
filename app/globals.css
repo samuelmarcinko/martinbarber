@@ -987,7 +987,7 @@ canvas {
   position: absolute;
   z-index: 0;
   color: var(--accent-cognac);
-  opacity: 0.1;
+  opacity: 0.13;
   pointer-events: none;
   user-select: none;
 }
@@ -995,6 +995,10 @@ canvas {
   width: 100%;
   height: auto;
   display: block;
+}
+/* Thinner strokes read better at the large background size. */
+.tool-backdrop .scissors-bg {
+  stroke-width: 3.2;
 }
 .tb-tr {
   top: -30px;
