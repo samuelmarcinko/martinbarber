@@ -97,8 +97,11 @@ export default function ScrollHero() {
       const scale = Math.max(cssW / img.width, cssH / img.height);
       const w = img.width * scale;
       const h = img.height * scale;
-      const x = (cssW - w) / 2;
-      const y = (cssH - h) / 2;
+      // On narrow (mobile) viewports the wide frame is cropped horizontally —
+      // bias the crop toward the centre-left of the room instead of dead centre.
+      const focusX = cssW < 768 ? 0.32 : 0.5;
+      const x = (cssW - w) * focusX;
+      const y = (cssH - h) * 0.5;
       ctx.drawImage(img, x, y, w, h);
     }
 
@@ -266,12 +269,10 @@ export default function ScrollHero() {
         <img
           src="/images/hero-poster.jpg"
           alt="Interiér barbershopu Martin Barber v Prešove"
+          className="hero-focus-img"
           style={{
             position: "absolute",
             inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
           }}
         />
         <div className="hero-scrim" aria-hidden />
