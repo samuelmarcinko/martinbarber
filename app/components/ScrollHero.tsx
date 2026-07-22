@@ -39,7 +39,6 @@ export default function ScrollHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const phase1Ref = useRef<HTMLDivElement>(null);
-  const phase2Ref = useRef<HTMLDivElement>(null);
   const phase3Ref = useRef<HTMLDivElement>(null);
   const indicatorRef = useRef<HTMLDivElement>(null);
 
@@ -207,11 +206,6 @@ export default function ScrollHero() {
         phase1Ref.current.style.transform = `translateY(${(1 - o) * -24}px)`;
         phase1Ref.current.style.pointerEvents = o > 0.5 ? "auto" : "none";
       }
-      if (phase2Ref.current) {
-        const o = band(p, 0.34, 0.42, 0.56, 0.62);
-        phase2Ref.current.style.opacity = String(o);
-        phase2Ref.current.style.transform = `translateY(${(1 - o) * 18}px)`;
-      }
       if (phase3Ref.current) {
         const o = band(p, 0.74, 0.82, 1.01, 1.02);
         phase3Ref.current.style.opacity = String(o);
@@ -300,21 +294,6 @@ export default function ScrollHero() {
             <div ref={phase1Ref} className="hero-phase hero-phase-1">
               <div className="container">
                 <Phase1 />
-              </div>
-            </div>
-
-            <div
-              ref={phase2Ref}
-              className="hero-phase hero-phase-2"
-              style={{ opacity: 0 }}
-            >
-              <div className="container hero-center">
-                <p className="eyebrow">REMESLO V POHYBE</p>
-                <h2 className="display hero-phase2-title">
-                  Každý detail
-                  <br />
-                  má svoj význam.
-                </h2>
               </div>
             </div>
 

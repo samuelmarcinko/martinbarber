@@ -88,9 +88,9 @@ canvas {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0;
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: 0.005em;
   color: var(--text-primary);
 }
 
@@ -207,15 +207,15 @@ canvas {
   background:
     linear-gradient(
       to left,
-      rgba(245, 227, 190, 0.95) 0%,
-      rgba(245, 227, 190, 0.58) 30%,
-      rgba(245, 227, 190, 0) 62%
+      rgba(10, 8, 6, 0.86) 0%,
+      rgba(10, 8, 6, 0.5) 30%,
+      rgba(10, 8, 6, 0) 62%
     ),
     linear-gradient(
       to top,
-      rgba(245, 227, 190, 0.5) 0%,
-      rgba(245, 227, 190, 0.08) 45%,
-      rgba(245, 227, 190, 0) 70%
+      rgba(10, 8, 6, 0.58) 0%,
+      rgba(10, 8, 6, 0.1) 46%,
+      rgba(10, 8, 6, 0) 72%
     );
 }
 
@@ -262,15 +262,16 @@ canvas {
 }
 
 .hero-title {
-  font-size: clamp(4rem, 10vw, 9rem);
-  line-height: 0.9;
-  font-weight: 900;
+  font-size: clamp(3.6rem, 9.5vw, 8.5rem);
+  line-height: 0.98;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.005em;
+  letter-spacing: 0.045em;
+  color: #f8efd8;
   margin: 0.6rem 0 1.4rem;
   text-shadow:
-    0 1px 2px rgba(245, 227, 190, 0.85),
-    0 2px 26px rgba(245, 227, 190, 0.55);
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 2px 30px rgba(0, 0, 0, 0.5);
 }
 
 .hero-body {
@@ -280,16 +281,19 @@ canvas {
 }
 
 .hero-phase-1 .hero-body,
-.hero-phase-3 .hero-body {
-  color: var(--text-primary);
+.hero-phase-3 .hero-body,
+.hero-content-static .hero-body {
+  color: #ece3d0;
   text-shadow:
-    0 1px 2px rgba(245, 227, 190, 0.85),
-    0 2px 18px rgba(245, 227, 190, 0.5);
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 2px 16px rgba(0, 0, 0, 0.45);
 }
 
 .hero-phase-1 .eyebrow,
-.hero-phase-3 .eyebrow {
-  text-shadow: 0 1px 10px rgba(245, 227, 190, 0.8);
+.hero-phase-3 .eyebrow,
+.hero-content-static .eyebrow {
+  color: #e2c48d;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
 }
 
 .hero-lead {
@@ -301,6 +305,33 @@ canvas {
   flex-wrap: wrap;
   gap: 0.9rem;
   pointer-events: auto;
+}
+
+/* Hero buttons sit on the dark overlay, so they use a brass / light-outline
+   treatment (the cream-page buttons stay dark elsewhere). */
+.hero-phase .btn-primary,
+.hero-content-static .btn-primary {
+  background: linear-gradient(180deg, #e7c98e, #c9a366);
+  color: #241a0d;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+.hero-phase .btn-primary:hover,
+.hero-content-static .btn-primary:hover {
+  background: linear-gradient(180deg, #f0d59d, #d4ae70);
+}
+
+.hero-phase .btn-ghost,
+.hero-content-static .btn-ghost {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(245, 235, 214, 0.55);
+  color: #f4ead3;
+}
+
+.hero-phase .btn-ghost:hover,
+.hero-content-static .btn-ghost:hover {
+  border-color: #e7c98e;
+  background: rgba(255, 255, 255, 0.14);
 }
 
 /* Phase 2 — centred statement on a frosted cream panel for legibility. */
@@ -355,9 +386,10 @@ canvas {
 .hero-phase3-title {
   font-size: clamp(2.4rem, 5.5vw, 4.6rem);
   line-height: 1.02;
+  color: #f8efd8;
   text-shadow:
-    0 1px 2px rgba(245, 227, 190, 0.85),
-    0 2px 24px rgba(245, 227, 190, 0.55);
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 2px 26px rgba(0, 0, 0, 0.5);
 }
 
 .hero-phase3-inner .hero-body {
@@ -381,13 +413,14 @@ canvas {
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent-cognac);
+  color: #e2c48d;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
 }
 
 .hero-indicator-line {
   width: 2px;
   height: 46px;
-  background: linear-gradient(to bottom, var(--accent-cognac), transparent);
+  background: linear-gradient(to bottom, #e2c48d, transparent);
   position: relative;
   overflow: hidden;
   border-radius: 2px;
@@ -400,7 +433,7 @@ canvas {
   left: 0;
   width: 100%;
   height: 50%;
-  background: var(--accent-brass);
+  background: #f4ead3;
   animation: heroScroll 1.8s ease-in-out infinite;
 }
 
@@ -802,9 +835,9 @@ canvas {
   .hero-scrim {
     background: linear-gradient(
       to top,
-      rgba(245, 227, 190, 0.93) 0%,
-      rgba(245, 227, 190, 0.35) 44%,
-      rgba(245, 227, 190, 0) 72%
+      rgba(10, 8, 6, 0.86) 0%,
+      rgba(10, 8, 6, 0.32) 46%,
+      rgba(10, 8, 6, 0) 74%
     );
   }
   .hero-right {

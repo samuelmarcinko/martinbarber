@@ -1,16 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Lora } from "next/font/google";
+import { Cormorant_Garamond, Lora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteUrl } from "./lib/siteUrl";
 import { siteConfig } from "./lib/siteConfig";
 import "./globals.css";
 
-// Classic barber serif pairing: a high-contrast display serif for headings
-// and a warm, highly readable serif for body copy.
-const playfair = Playfair_Display({
+// Classic, refined barber serif pairing: an elegant high-contrast display
+// serif for headings (lighter than a heavy modern serif) and a warm, highly
+// readable serif for body copy.
+const cormorant = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
-  weight: ["600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
   variable: "--font-display-src",
   display: "swap",
 });
@@ -76,7 +77,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="sk" className={`${playfair.variable} ${lora.variable}`}>
+    <html lang="sk" className={`${cormorant.variable} ${lora.variable}`}>
       <body>
         {children}
         <Analytics />
