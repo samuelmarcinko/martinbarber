@@ -1,31 +1,30 @@
 :root {
-  /* Backgrounds */
-  --bg-primary: #0e0d0c;
-  --bg-secondary: #151310;
-  --surface: #1c1915;
-  --surface-light: #231f1a;
+  /* Warm cream backgrounds */
+  --bg-primary: #f5e3be;
+  --bg-secondary: #efd8aa;
+  --surface: #fbefd3;
+  --surface-light: #fff8e8;
 
-  /* Text */
-  --text-primary: #f5f1ea;
-  --text-body: #d5cec3;
-  --text-muted: #9c9286;
+  /* Text — warm espresso on cream (WCAG AA) */
+  --text-primary: #241a0d;
+  --text-body: #453723;
+  --text-muted: #6a5433;
 
   /* Accents */
-  --accent-brass: #c5a36a;
-  --accent-light: #e0c28c;
-  --cognac: #9c613b;
-  --dark-brown: #34251c;
+  --accent-cognac: #7a4a1e;
+  --accent-brass: #a9762f;
+  --accent-deep: #5e3a16;
 
   /* Lines */
-  --border-brass: rgba(197, 163, 106, 0.25);
-  --border-neutral: rgba(255, 255, 255, 0.09);
+  --border-brass: rgba(122, 74, 30, 0.3);
+  --border-neutral: rgba(45, 30, 15, 0.16);
 
   /* Effects */
-  --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  --shadow: 0 24px 60px rgba(90, 60, 25, 0.18);
 
-  /* Fonts (mapped from next/font in layout.tsx) */
-  --font-display: var(--font-bebas), "Arial Narrow", sans-serif;
-  --font-body: var(--font-manrope), system-ui, sans-serif;
+  /* Fonts */
+  --font-display: var(--font-display-src), "Times New Roman", Georgia, serif;
+  --font-body: var(--font-body-src), Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -75,11 +74,11 @@ canvas {
 
 .eyebrow {
   font-family: var(--font-body);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--accent-brass);
+  color: var(--accent-cognac);
 }
 
 .section {
@@ -89,16 +88,15 @@ canvas {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
   color: var(--text-primary);
 }
 
 /* Focus visibility for keyboard users ------------------------------------ */
 :focus-visible {
-  outline: 2px solid var(--accent-light);
+  outline: 2px solid var(--accent-cognac);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -112,6 +110,7 @@ canvas {
   min-height: 48px;
   padding: 0.95rem 1.75rem;
   border-radius: 16px;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -126,23 +125,25 @@ canvas {
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, var(--accent-light), var(--accent-brass));
-  color: #211a10;
-  box-shadow: 0 14px 34px rgba(197, 163, 106, 0.22);
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 14px 30px rgba(35, 25, 14, 0.22);
 }
 
 .btn-primary:hover {
+  background: #3a2a17;
   transform: translateY(-2px);
 }
 
 .btn-ghost {
-  background: transparent;
+  background: rgba(255, 253, 246, 0.35);
   border-color: var(--border-brass);
   color: var(--text-primary);
 }
 
 .btn-ghost:hover {
-  border-color: var(--accent-brass);
+  border-color: var(--accent-cognac);
+  background: rgba(255, 253, 246, 0.6);
   transform: translateY(-2px);
 }
 
@@ -166,7 +167,7 @@ canvas {
   width: 100vw;
   height: 100svh;
   overflow: hidden;
-  background: #0e0d0c;
+  background: var(--bg-primary);
 }
 
 .hero-canvas {
@@ -188,6 +189,8 @@ canvas {
   object-fit: cover;
 }
 
+/* Cream scrim: blends the interior footage into the cream page and gives the
+   dark serif overlays a legible backdrop at the lower / left edges. */
 .hero-scrim {
   position: absolute;
   inset: 0;
@@ -195,15 +198,15 @@ canvas {
   background:
     linear-gradient(
       90deg,
-      rgba(8, 7, 6, 0.78) 0%,
-      rgba(8, 7, 6, 0.32) 38%,
-      transparent 68%
+      rgba(245, 227, 190, 0.92) 0%,
+      rgba(245, 227, 190, 0.45) 36%,
+      rgba(245, 227, 190, 0) 66%
     ),
     linear-gradient(
       to top,
-      rgba(8, 7, 6, 0.74) 0%,
-      rgba(8, 7, 6, 0.14) 45%,
-      transparent 72%
+      rgba(245, 227, 190, 0.9) 0%,
+      rgba(245, 227, 190, 0.16) 46%,
+      rgba(245, 227, 190, 0) 74%
     );
 }
 
@@ -232,14 +235,33 @@ canvas {
 
 .hero-title {
   font-size: clamp(4rem, 10vw, 9rem);
-  line-height: 0.86;
+  line-height: 0.9;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
   margin: 0.6rem 0 1.4rem;
+  text-shadow:
+    0 1px 2px rgba(245, 227, 190, 0.85),
+    0 2px 26px rgba(245, 227, 190, 0.55);
 }
 
 .hero-body {
   color: var(--text-body);
   font-size: clamp(1rem, 1.4vw, 1.15rem);
-  max-width: 40ch;
+  max-width: 42ch;
+}
+
+.hero-phase-1 .hero-body,
+.hero-phase-3 .hero-body {
+  color: var(--text-primary);
+  text-shadow:
+    0 1px 2px rgba(245, 227, 190, 0.85),
+    0 2px 18px rgba(245, 227, 190, 0.5);
+}
+
+.hero-phase-1 .eyebrow,
+.hero-phase-3 .eyebrow {
+  text-shadow: 0 1px 10px rgba(245, 227, 190, 0.8);
 }
 
 .hero-lead {
@@ -253,24 +275,34 @@ canvas {
   pointer-events: auto;
 }
 
+/* Phase 2 — centred statement on a frosted cream panel for legibility. */
+.hero-phase-2 {
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0;
+}
+
 .hero-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 0.9rem;
-  justify-content: center;
-  height: 100%;
-  padding-bottom: 0;
-}
-
-.hero-phase-2 {
-  align-items: center;
-  padding-bottom: 0;
+  height: auto;
+  max-width: min(90vw, 680px);
+  margin: 0 auto;
+  padding: clamp(1.6rem, 4vw, 2.75rem) clamp(1.6rem, 5vw, 3.2rem);
+  background: rgba(251, 239, 211, 0.74);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(122, 74, 30, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(90, 60, 25, 0.16);
 }
 
 .hero-phase2-title {
-  font-size: clamp(2.6rem, 6.5vw, 5.5rem);
+  font-size: clamp(2.6rem, 6.5vw, 5.25rem);
+  line-height: 1.02;
 }
 
 .hero-phase-3 {
@@ -289,12 +321,15 @@ canvas {
   flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
-  text-shadow: 0 2px 30px rgba(8, 7, 6, 0.6);
   pointer-events: auto;
 }
 
 .hero-phase3-title {
   font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+  line-height: 1.02;
+  text-shadow:
+    0 1px 2px rgba(245, 227, 190, 0.85),
+    0 2px 24px rgba(245, 227, 190, 0.55);
 }
 
 .hero-phase3-inner .hero-body {
@@ -318,19 +353,16 @@ canvas {
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--accent-cognac);
 }
 
 .hero-indicator-line {
-  width: 1px;
+  width: 2px;
   height: 46px;
-  background: linear-gradient(
-    to bottom,
-    var(--accent-brass),
-    transparent
-  );
+  background: linear-gradient(to bottom, var(--accent-cognac), transparent);
   position: relative;
   overflow: hidden;
+  border-radius: 2px;
 }
 
 .hero-indicator-line::after {
@@ -340,14 +372,22 @@ canvas {
   left: 0;
   width: 100%;
   height: 50%;
-  background: var(--accent-light);
+  background: var(--accent-brass);
   animation: heroScroll 1.8s ease-in-out infinite;
 }
 
 @keyframes heroScroll {
-  0% { transform: translateY(0); opacity: 0; }
-  40% { opacity: 1; }
-  100% { transform: translateY(300%); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300%);
+    opacity: 0;
+  }
 }
 
 .hero-content-static {
@@ -360,19 +400,20 @@ canvas {
 
 /* ================================================================= SECTIONS */
 .section-head {
-  max-width: 720px;
+  max-width: 760px;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
 .section-title {
   font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.04;
   margin: 0.9rem 0 1.2rem;
 }
 
 .section-intro {
   color: var(--text-body);
   font-size: clamp(1rem, 1.3vw, 1.12rem);
-  max-width: 52ch;
+  max-width: 54ch;
 }
 
 /* Services */
@@ -387,31 +428,34 @@ canvas {
 }
 
 .service-card {
-  background: var(--bg-primary);
+  background: var(--surface);
   padding: clamp(1.75rem, 3vw, 2.5rem);
   min-height: 210px;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
   border-top: 2px solid transparent;
-  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .service-card:hover {
-  background: var(--surface);
-  border-top-color: var(--accent-brass);
+  background: var(--surface-light);
+  border-top-color: var(--accent-cognac);
   transform: translateY(-3px);
 }
 
 .service-icon {
   width: 40px;
   height: 40px;
-  color: var(--accent-brass);
+  color: var(--accent-deep);
 }
 
 .service-card h3 {
-  font-family: var(--font-body);
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -464,7 +508,7 @@ canvas {
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent-brass);
+  color: var(--accent-cognac);
   margin-bottom: 0.4rem;
   font-weight: 600;
 }
@@ -489,15 +533,15 @@ canvas {
 .ritual-num {
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
   line-height: 1;
   color: var(--accent-brass);
-  opacity: 0.55;
 }
 
 .ritual-step h3 {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   margin: 0.8rem 0 0.7rem;
   color: var(--text-primary);
 }
@@ -534,11 +578,26 @@ canvas {
   transform: scale(1.025);
 }
 
-.gallery-a { grid-column: span 4; grid-row: span 2; }
-.gallery-b { grid-column: span 2; grid-row: span 2; }
-.gallery-c { grid-column: span 2; grid-row: span 2; }
-.gallery-d { grid-column: span 2; grid-row: span 2; }
-.gallery-e { grid-column: span 2; grid-row: span 2; }
+.gallery-a {
+  grid-column: span 4;
+  grid-row: span 2;
+}
+.gallery-b {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-c {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-d {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-e {
+  grid-column: span 2;
+  grid-row: span 2;
+}
 
 /* Booking */
 .booking {
@@ -558,7 +617,7 @@ canvas {
   max-width: 90vw;
   background: radial-gradient(
     circle,
-    rgba(197, 163, 106, 0.16) 0%,
+    rgba(122, 74, 30, 0.14) 0%,
     transparent 62%
   );
   pointer-events: none;
@@ -571,6 +630,7 @@ canvas {
 
 .booking-title {
   font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 1.03;
   margin: 0.9rem 0 1.2rem;
 }
 
@@ -602,14 +662,25 @@ canvas {
   font-size: 0.68rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent-brass);
+  color: var(--accent-cognac);
   margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
-.contact-item p {
+.contact-item p,
+.contact-item a {
   color: var(--text-body);
   font-size: 1.05rem;
+}
+
+.contact-item a {
+  border-bottom: 1px solid var(--border-brass);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: var(--accent-cognac);
+  border-color: var(--accent-cognac);
 }
 
 /* Footer */
@@ -629,8 +700,9 @@ canvas {
 
 .footer-brand {
   font-family: var(--font-display);
-  font-size: 1.6rem;
-  letter-spacing: 0.05em;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
   color: var(--text-primary);
 }
 
@@ -648,12 +720,12 @@ canvas {
 .footer-links a {
   color: var(--text-body);
   font-size: 0.9rem;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   transition: color 0.2s ease;
 }
 
 .footer-links a:hover {
-  color: var(--accent-light);
+  color: var(--accent-cognac);
 }
 
 .footer-copy {
@@ -663,31 +735,86 @@ canvas {
 
 /* ================================================================ RESPONSIVE */
 @media (max-width: 1024px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .craft-grid { grid-template-columns: 1fr; }
-  .craft-media { aspect-ratio: 16 / 10; max-width: 560px; }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .craft-grid {
+    grid-template-columns: 1fr;
+  }
+  .craft-media {
+    aspect-ratio: 16 / 10;
+    max-width: 560px;
+  }
 }
 
 @media (max-width: 768px) {
-  .hero-outer { height: 300vh; }
-  .hero-phase { padding-bottom: clamp(4.5rem, 14vh, 7rem); }
-  .hero-phase1-inner, .hero-phase3-inner { text-align: center; align-items: center; margin: 0 auto; }
-  .hero-actions { justify-content: center; }
-  .hero-right { justify-content: center; text-align: center; }
-  .hero-phase3-inner .hero-body { text-align: center; }
-  .hero-phase-1 { align-items: flex-end; }
-  .hero-title { font-size: clamp(3.4rem, 17vw, 6rem); }
-  .services-grid { grid-template-columns: 1fr; }
-  .ritual-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
-  .gallery-a { grid-column: span 2; grid-row: span 2; }
-  .gallery-b, .gallery-c, .gallery-d, .gallery-e { grid-column: span 1; grid-row: span 1; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .hero-outer {
+    height: 300vh;
+  }
+  .hero-phase {
+    padding-bottom: clamp(4.5rem, 14vh, 7rem);
+  }
+  .hero-phase1-inner,
+  .hero-phase3-inner {
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .hero-actions {
+    justify-content: center;
+  }
+  .hero-right {
+    justify-content: center;
+    text-align: center;
+  }
+  .hero-phase3-inner .hero-body {
+    text-align: center;
+  }
+  .hero-title {
+    font-size: clamp(3.4rem, 17vw, 6rem);
+  }
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .ritual-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 130px;
+  }
+  .gallery-a {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .gallery-b,
+  .gallery-c,
+  .gallery-d,
+  .gallery-e {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .craft-media img, .gallery-item img, .service-card { transition: none; }
-  .service-card:hover, .craft-media:hover img, .gallery-item:hover img { transform: none; }
-  .hero-indicator-line::after { animation: none; }
+  .craft-media img,
+  .gallery-item img,
+  .service-card {
+    transition: none;
+  }
+  .service-card:hover,
+  .craft-media:hover img,
+  .gallery-item:hover img {
+    transform: none;
+  }
+  .hero-indicator-line::after {
+    animation: none;
+  }
 }

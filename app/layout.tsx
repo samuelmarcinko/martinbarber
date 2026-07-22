@@ -1,21 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Manrope } from "next/font/google";
+import { Playfair_Display, Lora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteUrl } from "./lib/siteUrl";
 import { siteConfig } from "./lib/siteConfig";
 import "./globals.css";
 
-const bebas = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-bebas",
+// Classic barber serif pairing: a high-contrast display serif for headings
+// and a warm, highly readable serif for body copy.
+const playfair = Playfair_Display({
+  subsets: ["latin", "latin-ext"],
+  weight: ["600", "700", "800", "900"],
+  variable: "--font-display-src",
   display: "swap",
 });
 
-const manrope = Manrope({
+const lora = Lora({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-manrope",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body-src",
   display: "swap",
 });
 
@@ -63,7 +66,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0e0d0c",
+  themeColor: "#F5E3BE",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
@@ -73,7 +76,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="sk" className={`${bebas.variable} ${manrope.variable}`}>
+    <html lang="sk" className={`${playfair.variable} ${lora.variable}`}>
       <body>
         {children}
         <Analytics />

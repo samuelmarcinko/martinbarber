@@ -92,7 +92,7 @@ export default function ScrollHero() {
 
     function drawImage(img: HTMLImageElement) {
       if (!ctx) return;
-      ctx.fillStyle = "#0e0d0c";
+      ctx.fillStyle = "#f5e3be";
       ctx.fillRect(0, 0, cssW, cssH);
       const scale = Math.max(cssW / img.width, cssH / img.height);
       const w = img.width * scale;
@@ -258,7 +258,7 @@ export default function ScrollHero() {
         style={{
           position: "relative",
           minHeight: "100svh",
-          background: "#0e0d0c",
+          background: "#f5e3be",
           overflow: "hidden",
         }}
       >

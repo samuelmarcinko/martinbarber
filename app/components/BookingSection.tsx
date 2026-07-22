@@ -28,7 +28,11 @@ export default function BookingSection() {
           </Reveal>
           <Reveal delay={0.22}>
             <div className="booking-actions">
-              <a href="#kontakt" className="btn btn-primary">
+              <a
+                href={siteConfig.phoneHref}
+                className="btn btn-primary"
+                aria-label={`Rezervovať termín telefonicky na čísle ${siteConfig.phone}`}
+              >
                 Rezervovať termín
               </a>
               <span className="booking-sub">
@@ -41,7 +45,9 @@ export default function BookingSection() {
         <div id="kontakt" className="contact-grid">
           <Reveal className="contact-item">
             <h4>Telefón</h4>
-            <p>Doplniť telefón</p>
+            <p>
+              <a href={siteConfig.phoneHref}>{siteConfig.phone}</a>
+            </p>
           </Reveal>
           <Reveal className="contact-item" delay={0.08}>
             <h4>Adresa</h4>

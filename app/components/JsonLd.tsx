@@ -15,8 +15,11 @@ export default function JsonLd() {
     description: siteConfig.metaDescription,
     url: siteUrl,
     image: `${siteUrl}/images/martinbarber-start.png`,
+    telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
+      streetAddress: siteConfig.streetAddress,
+      postalCode: siteConfig.postalCode,
       addressLocality: siteConfig.city,
       addressCountry: "SK",
     },

@@ -17,8 +17,11 @@ export type Service = {
 export const siteConfig = {
   name: "Martin Barber",
   city: "Prešov",
-  phone: "",
-  address: "Prešov",
+  phone: "0948 177 144",
+  phoneHref: "tel:+421948177144",
+  address: "Weberova 11710/6, 080 01 Prešov",
+  streetAddress: "Weberova 11710/6",
+  postalCode: "080 01",
   bookingUrl: "#kontakt",
   instagramUrl: "",
   facebookUrl: "",
