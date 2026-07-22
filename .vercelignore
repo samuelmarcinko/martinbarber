@@ -1,5 +1,8 @@
-frames/
-assets/generated/
-references/
+# Anchored to the repo root (leading slash) so these ONLY match the top-level
+# development directories — never public/frames, public/images or public/hero.mp4,
+# which must ship to production for the scroll-driven canvas hero.
+/frames/
+/assets/generated/
+/references/
 *.log
 .DS_Store
