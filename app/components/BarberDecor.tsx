@@ -3,8 +3,11 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
-/* Animated scissors that gently "snip" on a loop (pure SVG + CSS). */
+/* Animated scissors that "snip" on a loop. Uses SVG SMIL animateTransform so
+   the blades rotate around the exact pivot (50,79) reliably on every browser
+   incl. iOS Safari — CSS transform-box on SVG groups is flaky there. */
 export function ScissorsSnip({ className = "" }: { className?: string }) {
+  const reduce = useReducedMotion();
   return (
     <svg
       className={`scissors-snip ${className}`}
@@ -17,13 +20,39 @@ export function ScissorsSnip({ className = "" }: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <g className="blade blade-a">
+      <g>
         <circle cx="30" cy="122" r="13" />
         <line x1="42" y1="112" x2="72" y2="24" />
+        {!reduce && (
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            values="-11 50 79; 1.5 50 79; -11 50 79"
+            keyTimes="0; 0.5; 1"
+            dur="2.1s"
+            calcMode="spline"
+            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+            repeatCount="indefinite"
+          />
+        )}
       </g>
-      <g className="blade blade-b">
+      <g>
         <circle cx="70" cy="122" r="13" />
         <line x1="58" y1="112" x2="28" y2="24" />
+        {!reduce && (
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            values="11 50 79; -1.5 50 79; 11 50 79"
+            keyTimes="0; 0.5; 1"
+            dur="2.1s"
+            calcMode="spline"
+            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+            repeatCount="indefinite"
+          />
+        )}
       </g>
       <circle cx="50" cy="79" r="3.4" fill="currentColor" stroke="none" />
     </svg>
@@ -96,7 +125,7 @@ export function ToolBackdrop({
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [46, -46]);
+  const y = useTransform(scrollYProgress, [0, 1], [90, -90]);
 
   return (
     <motion.div
