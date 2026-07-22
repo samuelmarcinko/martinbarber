@@ -42,20 +42,38 @@ export default function BookingSection() {
           </Reveal>
         </div>
 
-        <div id="kontakt" className="contact-grid">
-          <Reveal className="contact-item">
-            <h4>Telefón</h4>
-            <p>
-              <a href={siteConfig.phoneHref}>{siteConfig.phone}</a>
-            </p>
+        <div id="kontakt" className="contact-2col">
+          <Reveal className="contact-info">
+            <p className="eyebrow">KDE NÁS NÁJDETE</p>
+            <h3 className="display contact-heading">
+              {siteConfig.name} · {siteConfig.city}
+            </h3>
+            <div className="contact-list">
+              <div className="contact-item">
+                <h4>Telefón</h4>
+                <p>
+                  <a href={siteConfig.phoneHref}>{siteConfig.phone}</a>
+                </p>
+              </div>
+              <div className="contact-item">
+                <h4>Adresa</h4>
+                <p>{siteConfig.address}</p>
+              </div>
+              <div className="contact-item">
+                <h4>Rezervácia</h4>
+                <p>Telefonicky alebo osobne</p>
+              </div>
+            </div>
           </Reveal>
-          <Reveal className="contact-item" delay={0.08}>
-            <h4>Adresa</h4>
-            <p>{siteConfig.address}</p>
-          </Reveal>
-          <Reveal className="contact-item" delay={0.16}>
-            <h4>Rezervácia</h4>
-            <p>Telefonicky alebo osobne</p>
+
+          <Reveal className="contact-photo" delay={0.12}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/mb-adresa.avif"
+              alt="Budova, v ktorej sídli Martin Barber — Weberova 11710/6, Prešov"
+              loading="lazy"
+              decoding="async"
+            />
           </Reveal>
         </div>
       </div>

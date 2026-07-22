@@ -8,6 +8,7 @@ import {
   FRAME_PADDING,
   FRAME_DIRECTORY,
 } from "../lib/frameConfig";
+import { siteConfig } from "../lib/siteConfig";
 
 const MAX_CONCURRENT = 6;
 
@@ -314,7 +315,11 @@ export default function ScrollHero() {
                     Čistý strih, upravená brada a výsledok, ktorý sedí tvojmu
                     štýlu.
                   </p>
-                  <a href="#rezervacia" className="btn btn-primary">
+                  <a
+                    href={siteConfig.phoneHref}
+                    className="btn btn-primary"
+                    aria-label={`Rezervovať návštevu telefonicky na čísle ${siteConfig.phone}`}
+                  >
                     Rezervovať návštevu
                   </a>
                 </div>
@@ -363,11 +368,15 @@ function Phase1({ innerRef }: { innerRef?: null } = {}) {
       </Item>
       <Item>
         <div className="hero-actions">
-          <a href="#rezervacia" className="btn btn-primary">
+          <a
+            href={siteConfig.phoneHref}
+            className="btn btn-primary"
+            aria-label={`Rezervovať termín telefonicky na čísle ${siteConfig.phone}`}
+          >
             Rezervovať termín
           </a>
-          <a href="#sluzby" className="btn btn-ghost">
-            Objaviť priestor
+          <a href="#kontakt" className="btn btn-ghost">
+            Kde nás nájdete?
           </a>
         </div>
       </Item>
