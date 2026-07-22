@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { SnipDivider, ToolBackdrop } from "./BarberDecor";
 import { siteConfig } from "../lib/siteConfig";
 
 export default function BookingSection() {
@@ -8,8 +9,10 @@ export default function BookingSection() {
       className="section booking"
       aria-labelledby="booking-title"
     >
+      <ToolBackdrop variant="comb" className="tb-bl tb-comb" rotate={6} />
       <div className="container">
         <div className="booking-inner">
+          <SnipDivider />
           <Reveal>
             <p className="eyebrow">TVOJ ČAS. TVOJ ŠTÝL.</p>
           </Reveal>

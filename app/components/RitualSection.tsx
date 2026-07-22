@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { SnipDivider, ToolBackdrop } from "./BarberDecor";
 
 const steps = [
   {
@@ -25,8 +26,10 @@ export default function RitualSection() {
       style={{ background: "var(--bg-secondary)" }}
       aria-labelledby="ritual-title"
     >
+      <ToolBackdrop variant="scissors" className="tb-tr" rotate={-12} />
       <div className="container">
         <div className="section-head">
+          <SnipDivider />
           <Reveal>
             <p className="eyebrow">TVOJA NÁVŠTEVA</p>
           </Reveal>

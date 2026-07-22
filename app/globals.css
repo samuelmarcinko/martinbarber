@@ -971,3 +971,110 @@ canvas {
     animation: none;
   }
 }
+
+/* ================================================================ BARBER DECOR */
+/* Keep decorative motifs clipped inside their section and behind content. */
+.section {
+  overflow: hidden;
+}
+.section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Faint barber-tool motifs drifting in the background */
+.tool-backdrop {
+  position: absolute;
+  z-index: 0;
+  color: var(--accent-cognac);
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+}
+.tool-backdrop svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tb-tr {
+  top: -30px;
+  right: -20px;
+  width: clamp(180px, 22vw, 300px);
+}
+.tb-bl {
+  bottom: -40px;
+  left: -30px;
+  width: clamp(200px, 26vw, 360px);
+}
+.tb-comb {
+  width: clamp(220px, 30vw, 420px);
+}
+
+/* Section-opener: snipping scissors flanked by drifting barber-pole stripes */
+.snip-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  color: var(--accent-cognac);
+}
+.snip-line {
+  height: 5px;
+  width: clamp(48px, 12vw, 120px);
+  border-radius: 5px;
+  overflow: hidden;
+  opacity: 0.8;
+  background-image: repeating-linear-gradient(
+    -55deg,
+    var(--accent-cognac) 0,
+    var(--accent-cognac) 5px,
+    var(--accent-light) 5px,
+    var(--accent-light) 10px
+  );
+  background-size: 200% 100%;
+  animation: barberSlide 1.6s linear infinite;
+}
+.snip-divider .scissors-snip {
+  width: 26px;
+  height: 39px;
+  color: var(--accent-cognac);
+  flex: none;
+}
+
+.scissors-snip .blade {
+  transform-box: view-box;
+  transform-origin: 50px 79px;
+}
+.scissors-snip .blade-a {
+  animation: snipA 2.4s ease-in-out infinite;
+}
+.scissors-snip .blade-b {
+  animation: snipB 2.4s ease-in-out infinite;
+}
+
+@keyframes snipA {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(0deg); }
+}
+@keyframes snipB {
+  0%, 100% { transform: rotate(8deg); }
+  50% { transform: rotate(0deg); }
+}
+@keyframes barberSlide {
+  to { background-position: -20px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scissors-snip .blade-a,
+  .scissors-snip .blade-b,
+  .snip-line {
+    animation: none;
+  }
+}
+
+/* Left-align the snip divider when it opens a left-aligned section */
+.section-head .snip-divider,
+.booking-inner .snip-divider {
+  justify-content: flex-start;
+}

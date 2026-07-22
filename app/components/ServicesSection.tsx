@@ -1,11 +1,14 @@
 import Reveal from "./Reveal";
+import { SnipDivider, ToolBackdrop } from "./BarberDecor";
 import { services } from "../lib/siteConfig";
 
 export default function ServicesSection() {
   return (
     <section id="sluzby" className="section" aria-labelledby="sluzby-title">
+      <ToolBackdrop variant="scissors" className="tb-tr" rotate={14} />
       <div className="container">
         <div className="section-head">
+          <SnipDivider />
           <Reveal>
             <p className="eyebrow">SLUŽBY</p>
           </Reveal>

@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { ToolBackdrop } from "./BarberDecor";
 
 const values = [
   {
@@ -18,6 +19,7 @@ const values = [
 export default function CraftSection() {
   return (
     <section className="section" aria-labelledby="craft-title">
+      <ToolBackdrop variant="comb" className="tb-bl tb-comb" rotate={-8} />
       <div className="container">
         <div className="craft-grid">
           <div>

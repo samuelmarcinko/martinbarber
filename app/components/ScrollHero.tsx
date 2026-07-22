@@ -305,15 +305,15 @@ export default function ScrollHero() {
             >
               <div className="container hero-right">
                 <div className="hero-phase3-inner">
-                  <p className="eyebrow">VITAJ V MARTIN BARBER</p>
+                  <p className="eyebrow">MARTIN BARBER · PREŠOV</p>
                   <h2 className="display hero-phase3-title">
-                    Sadni si.
+                    Tvoj štýl,
                     <br />
-                    O zvyšok sa postaráme.
+                    naše remeslo.
                   </h2>
                   <p className="hero-body">
-                    Čistý strih, upravená brada a výsledok, ktorý sedí tvojmu
-                    štýlu.
+                    Rezervuj si termín a dopraj svojmu vzhľadu starostlivosť,
+                    ktorú si naozaj zaslúži.
                   </p>
                   <a
                     href={siteConfig.phoneHref}
